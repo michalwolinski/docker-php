@@ -10,12 +10,18 @@ RUN apk update && apk add \
     libxml2-dev \
     zip \
     unzip \
-    nano
+    nano \
+    supervisor
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www/html
+RUN rm -rf /tmp/* /var/cache/apk/*
+
+COPY config/supervisord.conf /etc/supervisord.conf
+COPY config/supervisord-phpfpm.conf /etc/supervisor/conf.d/supervisord-phpfpm.conf
 
 USER www-data
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
