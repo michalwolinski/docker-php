@@ -19,8 +19,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
+ARG environment=development
+
 COPY config/supervisord.conf /etc/supervisord.conf
 COPY config/supervisord-phpfpm.conf /etc/supervisor/conf.d/supervisord-phpfpm.conf
+COPY config/php-custom.ini /usr/local/etc/php/conf.d/php-custom.ini
+RUN mv "$PHP_INI_DIR/php.ini-$environment" "$PHP_INI_DIR/php.ini"
 
 USER www-data
 
