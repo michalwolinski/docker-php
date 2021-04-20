@@ -15,7 +15,7 @@ RUN apk update && apk add \
 
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli
 
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
 
 RUN rm -rf /tmp/* /var/cache/apk/*
 
