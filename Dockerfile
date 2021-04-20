@@ -13,7 +13,7 @@ RUN apk update && apk add \
     nano \
     supervisor
 
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd mysqli
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
