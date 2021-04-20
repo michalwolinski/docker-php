@@ -1,4 +1,4 @@
-FROM php:8-fpm-alpine AS haxmedia-docker-php
+FROM php:7.1-fpm-alpine AS haxmedia-docker-php
 
 MAINTAINER Michal Wolinski www.haxmedia.pl
 
